@@ -4,7 +4,7 @@ import akka.actor.Actor
 import akka.actor.Props
 
 class App extends Actor {
-  override def preStart(): Unit = {
+  override def preStart() {
     val greeter = context.actorOf(Props[Greeter], "greeter")
     greeter ! Greeter.Greet
   }

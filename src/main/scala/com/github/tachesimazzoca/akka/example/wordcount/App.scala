@@ -17,7 +17,7 @@ class App extends Actor with ActorLogging {
   private val reduceOutputs = new ListBuffer[Reducer.Output]
   private var sizeOfReduceInputs: Int = 0
 
-  override def preStart(): Unit = {
+  override def preStart() {
     mapOutputs.clear()
     reduceOutputs.clear()
     if (lines.size > 0) {
