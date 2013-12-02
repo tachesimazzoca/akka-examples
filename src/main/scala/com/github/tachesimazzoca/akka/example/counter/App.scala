@@ -32,7 +32,7 @@ class App extends Actor {
     counter ! Counter.Get
   }
 
-  def receive = {
+  def receive: Receive = {
     case Counter.Count(n: Int) => {
       println("Actor: " + n)
       context.stop(self)

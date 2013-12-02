@@ -9,7 +9,7 @@ class App extends Actor {
     greeter ! Greeter.Greet
   }
 
-  def receive = {
+  def receive: Receive = {
     case Greeter.Done => context.stop(self)
   }
 }

@@ -3,7 +3,7 @@ package com.github.tachesimazzoca.akka.example.wordcount
 import akka.actor.Actor
 
 protected class Reducer extends Actor {
-  def receive = {
+  def receive: Receive = {
     case m: Reducer.Input =>
       sender ! Reducer.Output(m.key, m.values.sum)
     case m @ _ =>

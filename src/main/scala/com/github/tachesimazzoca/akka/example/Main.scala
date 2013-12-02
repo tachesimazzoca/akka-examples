@@ -31,7 +31,7 @@ object Main {
 
   class Terminator(app: ActorRef) extends Actor with ActorLogging {
     context watch app
-    def receive = {
+    def receive: Receive = {
       case Terminated(_) =>
         log.info("application supervisor has terminated, shutting down")
         context.system.shutdown()

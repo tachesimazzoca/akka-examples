@@ -4,10 +4,10 @@ import akka.actor.Actor
 import akka.actor.Props
 
 class Sleeper extends Actor {
-  def receive = {
+  def receive: Receive = {
     case (a: Any, b: Long) =>
       context.actorOf(Props(new Actor {
-        def receive = {
+        def receive: Receive = {
           case (msg: Any, msec: Long) =>
             Thread.sleep(msec)
             sender ! msg

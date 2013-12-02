@@ -14,7 +14,7 @@ class App extends Actor with ActorLogging {
     sleeper ! (App.ShutdownRequest, 5000L)
   }
 
-  def receive = {
+  def receive: Receive = {
     case App.PrintRequest(str: String) => println(str)
     case App.ShutdownRequest => context.stop(self)
     case m @ _ => log.info("Unknown message - " + m)

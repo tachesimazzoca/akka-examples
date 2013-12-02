@@ -8,7 +8,7 @@ object Greeter {
 }
 
 class Greeter extends Actor {
-  def receive = {
+  def receive: Receive = {
     case Greeter.Greet =>
       println("Hello World!")
       sender ! Greeter.Done

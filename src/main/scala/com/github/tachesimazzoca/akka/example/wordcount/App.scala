@@ -28,7 +28,7 @@ class App extends Actor with ActorLogging {
     }
   }
 
-  def receive = {
+  def receive: Receive = {
     case mo: Mapper.Output =>
       mapOutputs += mo
       if (mapOutputs.size == lines.size) {
