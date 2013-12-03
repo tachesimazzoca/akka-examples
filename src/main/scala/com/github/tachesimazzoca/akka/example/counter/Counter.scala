@@ -12,7 +12,7 @@ protected class Counter extends Actor {
 }
 
 protected object Counter {
-  case class Increment()
-  case class Get()
+  case object Increment
+  case object Get
   case class Count(n: Int)
 }
