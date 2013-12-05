@@ -5,7 +5,7 @@ import akka.actor.ActorLogging
 import akka.actor.Props
 import akka.event.LoggingReceive
 
-class App extends Actor with ActorLogging {
+class Main extends Actor with ActorLogging {
   val accountA = context.actorOf(Props[Account], "accountA")
   val accountB = context.actorOf(Props[Account], "accountB")
 

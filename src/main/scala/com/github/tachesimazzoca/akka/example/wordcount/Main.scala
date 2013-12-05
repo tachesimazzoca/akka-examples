@@ -6,7 +6,7 @@ import akka.actor.Props
 
 import scala.collection.mutable.ListBuffer
 
-class App extends Actor with ActorLogging {
+class Main extends Actor with ActorLogging {
   private val lines = List(
     "Foo Bar Buz."
   , "Bar. Buz."

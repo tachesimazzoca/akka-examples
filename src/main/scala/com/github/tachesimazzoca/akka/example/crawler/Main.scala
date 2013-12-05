@@ -3,12 +3,12 @@ package com.github.tachesimazzoca.akka.example.crawler
 import akka.actor.Actor
 import akka.actor.Props
 
-object App {
+object Main {
   case class Done(url: String)
 }
 
-class App extends Actor {
-  import App._
+class Main extends Actor {
+  import Main._
 
   val receptionist = context.actorOf(Props[Receptionist])
 
