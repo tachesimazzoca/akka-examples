@@ -5,7 +5,6 @@ import scala.language.postfixOps
 import akka.actor.Actor
 import akka.actor.ActorRef
 import akka.actor.Props
-import akka.actor.Terminated
 import akka.actor.ReceiveTimeout
 import scala.concurrent.duration._
 

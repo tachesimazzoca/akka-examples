@@ -1,14 +1,11 @@
-package com.github.tachesimazzoca.akka.example.crawler
+package com.github.tachesimazzoca.akka.example.crawler.client
 
 import com.ning.http.client.AsyncHttpClient
 import java.util.concurrent.Executor
 import scala.concurrent.{Future, Promise}
 
-object WebClient {
+object AsyncWebClient extends WebClient {
   private val client = new AsyncHttpClient
-
-  case class Result(url: String, status: Int, body: Option[String])
-  case class BadStatus(status: Int) extends RuntimeException
 
   def get(url: String)(implicit exec: Executor): Future[Result] = {
     val p = Promise[Result]()

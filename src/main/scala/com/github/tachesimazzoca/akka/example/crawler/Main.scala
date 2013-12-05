@@ -42,6 +42,6 @@ class Main extends Actor {
   }
 
   override def postStop() {
-    WebClient.shutdown
+    client.AsyncWebClient.shutdown
   }
 }

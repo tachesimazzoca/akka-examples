@@ -8,6 +8,8 @@ import java.util.concurrent.Executor
 import scala.concurrent.ExecutionContext
 import scala.util.{Try, Success}
 
+import com.github.tachesimazzoca.akka.example.crawler.client._
+
 object Getter {
   case object Done
   case object Abort
@@ -42,10 +44,12 @@ class Getter(url: String, depth: Int) extends Actor {
   implicit val exec =
       context.dispatcher.asInstanceOf[Executor with ExecutionContext]
 
-  WebClient.get(url).pipeTo(self)
+  def client: WebClient = AsyncWebClient
+
+  client.get(url).pipeTo(self)
 
   def receive: Receive = {
-    case result: WebClient.Result =>
+    case result: Result =>
       for (
         x <- result.body;
         uri <- parseLinks(x);
@@ -55,7 +59,7 @@ class Getter(url: String, depth: Int) extends Actor {
       }
       context.parent ! Controller.Mark(url, result.status)
 
-    case Status.Failure(WebClient.BadStatus(status)) =>
+    case Status.Failure(BadStatus(status)) =>
       context.parent ! Controller.Mark(url, status)
 
     case Abort => stop()
