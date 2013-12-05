@@ -1,13 +1,15 @@
-package com.github.tachesimazzoca.akka.example.greeting
+package com.github.tachesimazzoca.akka.example.hello
 
 import akka.actor.Actor
 import akka.actor.Props
 
 class Main extends Actor {
   val greeter = context.actorOf(Props[Greeter], "greeter")
-  greeter ! Greeter.Greet
+  greeter ! Greeter.Request
 
   def receive: Receive = {
-    case Greeter.Done => context.stop(self)
+    case Greeter.Response(msg) =>
+      println(msg)
+      context.stop(self)
   }
 }
