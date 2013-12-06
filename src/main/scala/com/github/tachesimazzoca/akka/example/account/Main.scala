@@ -21,6 +21,8 @@ class Main extends Actor with ActorLogging {
     context.become(LoggingReceive {
       case Transaction.Done =>
         context.stop(self)
+      case Transaction.Failed =>
+        context.stop(self)
     })
   }
 }

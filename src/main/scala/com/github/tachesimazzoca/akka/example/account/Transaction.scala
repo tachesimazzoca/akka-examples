@@ -10,7 +10,6 @@ class Transaction extends Actor {
     case Transfer(from, to, amount) =>
       from ! Account.Withdraw(amount)
       context.become(awaitWithdraw(to, amount, sender))
-    case _ =>
   }
 
   def awaitWithdraw(to: ActorRef, amount: Int,
@@ -18,15 +17,12 @@ class Transaction extends Actor {
     case Account.Balance(_) =>
       to ! Account.Deposit(amount)
       context.become(awaitDeposit(client))
-    case _ =>
-      client ! Failed
-      context.stop(self)
+
+    case Account.Failed => client ! Failed
   }
 
   def awaitDeposit(client: ActorRef): Receive = LoggingReceive {
-    case Account.Balance(_) =>
-      client ! Done
-      context.stop(self)
+    case Account.Balance(_) => client ! Done
   }
 }
 
