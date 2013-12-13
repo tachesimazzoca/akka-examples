@@ -1,8 +1,9 @@
 package com.github.tachesimazzoca.akka.example.crawler
 
 import akka.actor.Actor
-import akka.pattern.pipe
+import akka.actor.ActorLogging
 import akka.actor.Status
+import akka.pattern.pipe
 import java.net.URI
 import java.util.concurrent.Executor
 import scala.concurrent.ExecutionContext
@@ -38,7 +39,7 @@ object Getter {
   }
 }
 
-class Getter(url: String, depth: Int) extends Actor {
+class Getter(url: String, depth: Int) extends Actor with ActorLogging {
   import Getter._
 
   implicit val exec =
@@ -62,12 +63,11 @@ class Getter(url: String, depth: Int) extends Actor {
     case Status.Failure(BadStatus(status)) =>
       context.parent ! Controller.Mark(url, status)
 
-    case Abort => stop()
-    case _ => stop()
+    case Done => stop()
+    case Abort =>
+      log.info("Aborted: " + self)
+      stop()
   }
 
-  def stop() {
-    context.parent ! Done
-    context.stop(self)
-  }
+  def stop() { context.stop(self) }
 }

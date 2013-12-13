@@ -13,7 +13,7 @@ class Main extends Actor {
   val receptionist = context.actorOf(Props[Receptionist])
 
   var urls = Set(
-    "http://akka.io/"
+    "http://akka.io/docs/"
   )
 
   receptionist ! Receptionist.Initialize(maxDepth = 2, maxQueueSize = 3)
@@ -27,7 +27,7 @@ class Main extends Actor {
     case Receptionist.Result(url, results) =>
       println(url)
       println("".padTo(url.length, '='))
-      results foreach { case (k, v) =>
+      results.take(20) foreach { case (k, v) =>
         println(v + " " + k)
       }
       self ! Done(url)
