@@ -22,8 +22,8 @@ object Getter {
     for {
       anchor <- A_TAG.findAllMatchIn(body)
       HREF_ATTR(dquot, quot, bare) <- anchor.subgroups
-    } yield if (dquot != null) dquot
-    else if (quot != null) quot
+    } yield if (Option(dquot).isDefined) dquot
+    else if (Option(quot).isDefined) quot
     else bare
   }
 
