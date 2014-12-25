@@ -1,4 +1,4 @@
-name := "akka-examples"
+name := "akka-examples-actor"
 
 version := "0.1.0-SNAPSHOT"
 
