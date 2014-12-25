@@ -9,8 +9,9 @@ import akka.actor.Props
 import akka.actor.Terminated
 import scala.util.control.NonFatal
 
-/** This implementation is a copy of akka.Main for Akka 2.1.x.
- * In 2.2.x, you can use the built-in akka.Main instead.
+/**
+ * This object is a copy of akka.Main for Akka 2.1.x.
+ * In the 2.2.x or higher version, you can use the built-in akka.Main instead.
  *
  *   % sbt run-main akka.Main ...
  *
