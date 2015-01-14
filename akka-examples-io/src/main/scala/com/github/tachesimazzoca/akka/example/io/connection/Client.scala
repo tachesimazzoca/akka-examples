@@ -17,7 +17,7 @@ class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor {
   IO(Tcp) ! Connect(remote)
   override def receive: Receive = connecting
 
-  def connecting: Receive = {
+  private def connecting: Receive = {
     case cf @ CommandFailed(con) =>
       listener ! cf
       context stop self
@@ -28,7 +28,7 @@ class Client(remote: InetSocketAddress, listener: ActorRef) extends Actor {
       context become closing
   }
 
-  def closing: Receive = {
+  private def closing: Receive = {
     case cc: ConnectionClosed =>
       listener ! cc
       context stop self
