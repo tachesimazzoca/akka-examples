@@ -1,4 +1,4 @@
-package com.github.tachesimazzoca.akka.example.io.connection
+package com.github.tachesimazzoca.akka.example.io.server
 
 import akka.actor._
 
@@ -7,7 +7,7 @@ import scala.util.control.NonFatal
 object Main {
   def main(args: Array[String]): Unit = {
     val system = ActorSystem("Main")
-    val app = system.actorOf(Props[Listener])
+    val app = system.actorOf(Props[Server])
     try {
       system.actorOf(Props(classOf[Terminator], app), "app-terminator")
     } catch {

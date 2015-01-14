@@ -1,4 +1,4 @@
-package com.github.tachesimazzoca.akka.example.io.connection
+package com.github.tachesimazzoca.akka.example.io.client
 
 import java.net.InetSocketAddress
 
