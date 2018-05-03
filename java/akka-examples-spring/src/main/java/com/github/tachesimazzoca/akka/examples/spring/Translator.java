@@ -1,4 +1,4 @@
-package com.github.tachesimazzoca.akka.examples.inject;
+package com.github.tachesimazzoca.akka.examples.spring;
 
 import akka.actor.UntypedActor;
 import org.springframework.beans.factory.annotation.Autowired;

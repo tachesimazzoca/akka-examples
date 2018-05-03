@@ -1,4 +1,4 @@
-package com.github.tachesimazzoca.akka.examples.inject;
+package com.github.tachesimazzoca.akka.examples.spring;
 
 import akka.actor.Actor;
 import akka.actor.IndirectActorProducer;
