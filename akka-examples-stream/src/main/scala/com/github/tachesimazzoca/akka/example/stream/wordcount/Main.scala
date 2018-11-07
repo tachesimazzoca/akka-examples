@@ -36,8 +36,8 @@ object Main {
       Flow[String].map { x =>
         x.split("[ .,;:]").filterNot(_.isEmpty)
           .foldLeft(Map.empty[String, Int]) { (acc, x) =>
-          acc.updated(x, acc.getOrElse(x, 0) + 1)
-        }
+            acc.updated(x, acc.getOrElse(x, 0) + 1)
+          }
       }
 
     val reducer: Sink[WordCount, Future[WordCount]] =
@@ -50,10 +50,11 @@ object Main {
       }
 
     println("Materializing")
-    val g: RunnableGraph[Future[WordCount]] =
-      source.via(mapper).toMat(reducer)(Keep.right)
+    val g: RunnableGraph[Future[WordCount]] = source.via(mapper).toMat(reducer)(Keep.right)
 
     println("Running")
-    g.run().foreach(println)
+    val done = g.run()
+    done.onComplete(_ => system.terminate())
+    done.foreach(println)
   }
 }
